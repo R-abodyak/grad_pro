@@ -51,7 +51,18 @@ if __name__ == '__main__':
     logger.info('inference image: %s in %.4f seconds.' % (args.image, elapsed))
 
     image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
-
+    for human in humans:
+        try:
+            for i in range(17):
+                part = human.body_parts[i]
+                print("id")
+                print(i)
+                print("x")
+                print(part.x)
+                print("y")
+                print(part.y)
+        except:
+            pass
     try:
         import matplotlib.pyplot as plt
 
@@ -86,6 +97,7 @@ if __name__ == '__main__':
         plt.imshow(tmp2_even, cmap=plt.cm.gray, alpha=0.5)
         plt.colorbar()
         plt.show()
+
     except Exception as e:
         logger.warning('matplitlib error, %s' % e)
         cv2.imshow('result', image)

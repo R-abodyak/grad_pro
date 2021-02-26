@@ -66,6 +66,25 @@ if __name__ == '__main__':
 
         logger.debug('image process+')
         humans = e.inference(image, resize_to_default=(w > 0 and h > 0), upsample_size=args.resize_out_ratio)
+        print("num of humans",len(humans))
+        for human in humans:
+
+               for i in range(17):
+                   try:
+                       part = human.body_parts[i]
+                       if (part.score == 0):
+                           continue
+                       print("id")
+                       print(part.part_idx)
+                       print("x")
+                       print(part.x)
+                       print("y")
+                       print(part.y)
+
+                   except:
+                     continue
+
+
 
         logger.debug('postprocess+')
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
